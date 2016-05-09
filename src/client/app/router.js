@@ -14,6 +14,12 @@ function config($routeProvider) {
     preventLoggedIn: false
   })
   
+  .when('/register', {
+    template: '<register></register>',
+    restricted: false,
+    preventLoggedIn: true
+  })
+  
   .when('/login', {
     template: '<login></login>',
     restricted: false,
@@ -39,7 +45,7 @@ function config($routeProvider) {
 
 // function routeChange($rootScope, $location, $window, authService) {
 //   $rootScope.$on('$routeChangeStart', function(event, next, current) {
-//     // if route us restricted and no token is present
+//     // if route is restricted and no token is present
 //     if(next.restricted && !$window.localStorage.getItem('token')) {
 //       $location.path('/login');
 //     }

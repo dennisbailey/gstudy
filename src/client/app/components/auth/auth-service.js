@@ -11,9 +11,9 @@ angular
   .module('gStudy')
   .service('authService', authService);
 
-authService.$inject = ['$http', '$window', '$rootScope'];
+authService.$inject = ['$http', '$window', '$location', '$rootScope'];
 
-function authService($http, $window, $rootScope) {
+function authService($http, $window, $location, $rootScope) {
   
   var user = {};
   
@@ -30,7 +30,7 @@ function authService($http, $window, $rootScope) {
     },
   
     register: function(user) {
-      console.log('Create a registration Route!');
+      return $http.post('/auth/register', user);
     },
   
     setUserInfo: function(userData) {
@@ -39,7 +39,7 @@ function authService($http, $window, $rootScope) {
     },
     
     setRegisterUserInfo: function(userData) {
-      $window.localStorage.setItem('user', JSON.stringify(userData.data.data.data.email));
+      $window.localStorage.setItem('user', JSON.stringify(userData.data.data.user.name));
       $window.localStorage.setItem('token', JSON.stringify(userData.data.data.token));
     },
   
