@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='gStudy'>
+  <head>
+    <meta charset="utf-8">
+    <title>gStudy</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/yeti/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css"
+  </head>
+  <body>
+    
+    <nav-bar></nav-bar>
+    
+    <div ng-view style="padding-top: 85px;"></div>
+
+    
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!--   Require Angular   -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular-route.js"></script>
+    <!--   Require app and router   -->
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="app/router.js"></script>
+    <!--   Require nav and footer   -->
+    <script type="text/javascript" src="app/components/nav-bar/nav-bar-directive.js"></script>
+    <!--   Require landing   -->
+    <script type="text/javascript" src="app/components/landing/landing-directive.js"></script>
+    <script type="text/javascript" src="app/components/landing/landing-controller.js"></script>
+    <!--   Require auth   -->
+    <script type="text/javascript" src="app/components/auth/authenticate.js"></script>
+    <script type="text/javascript" src="app/components/auth/auth-service.js"></script>
+    <script type="text/javascript" src="app/components/auth/auth-interceptor-service.js"></script>
+    <!--   Require register   -->
+    <script type="text/javascript" src="app/components/register/register-directive.js"></script>
+    <script type="text/javascript" src="app/components/register/register-controller.js"></script>
+    <!--   Require login   -->
+    <script type="text/javascript" src="app/components/login/login-directive.js"></script>
+    <script type="text/javascript" src="app/components/login/login-controller.js"></script>
+  </body>
+</html>
