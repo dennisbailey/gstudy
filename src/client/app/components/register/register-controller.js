@@ -15,12 +15,11 @@ function RegisterCtrl($rootScope, $location, authService) {
     authService.register(vm.user)
     
     .then( function(result) { authService.setUserInfo(result);
-                            $rootScope.loggedIn = true;
-                            $location.path('/'); 
+                              $rootScope.loggedIn = true;
+                              $location.path('/'); 
                           })
       
-    .catch( function (error) { console.log('register error', error); 
-                               vm.message = error; 
+    .catch( function (error) { vm.message = error.data.message; 
                                vm.show = true });
   
     // Empty the user object

@@ -29,7 +29,7 @@ router.post('/register', function(req, res, next) {
   })
   
   .catch( function (error) { return res.status(401).json({ status: 'fail',
-                                                           message: 'email and/or user already exists'}); });
+                                                           message: 'This email is already registered'}); });
   
 });
 
@@ -45,7 +45,7 @@ router.post('/login', function(req, res, next) {
                              var compare = bcrypt.compareSync(req.body.password, user.password);
                                
                              if (!compare) { return res.status(401).json({ status: 'fail',
-                                                                           message: 'email and/or password is incorrect.'});
+                                                                           message: 'This email and/or password is incorrect.'});
                              };
                              
                              if (compare) { var token = authHelpers.generateToken(req.body);
@@ -60,7 +60,7 @@ router.post('/login', function(req, res, next) {
   })
   
   .catch( function (error) { return res.status(401).json({ status: 'fail',
-                                                           message: 'email and/or password is incorrect.'}); 
+                                                           message: 'This email and/or password is incorrect.'}); 
   });
   
 });

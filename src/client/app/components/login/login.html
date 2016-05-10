@@ -1,6 +1,12 @@
 <div class="container">
 
   <div class="col-md-6 col-md-offset-3">
+    <div class="alert alert-danger text-center" 
+         role="alert" 
+         ng-show="vm.show"
+         >
+         <h4>{{vm.message}}</h4>
+    </div>
     <div class="panel panel-default">
       
       <div class="panel-heading">
