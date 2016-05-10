@@ -65,10 +65,8 @@ function routeChange($rootScope, $location, $window, authService, crudService) {
       
       crudService.getUserInfo(token)
       
-      .then( function (result) { 
-                                 $rootScope.loggedIn = true;
-//                                  $rootScope.userID = result.data.user.id; 
-                                 console.log('route change', result);})
+      .then( function (result) { $rootScope.loggedIn = true;
+                                 $rootScope.userID = result.data.user.id; })
       
       .catch( function (error) { $location.path('/'); });
     
