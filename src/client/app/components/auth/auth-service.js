@@ -20,7 +20,7 @@ function authService($http, $window, $location, $rootScope) {
   return {
   
     login: function(user) {
-      console.log('Create a login Route!');
+      return $http.post('/auth/login', user);
     },
   
     logout: function(user) {

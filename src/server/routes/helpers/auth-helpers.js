@@ -1,5 +1,6 @@
 var moment = require('moment');
 var jwt = require('jsonwebtoken');
+var bcrypt = require('bcrypt');
 
 var TOKEN_SECRET = '\x07q\xa1\xb0\xa0\xa7x\xda\xb2\xa9+g|\xd5\x9d\xd9\x9f\x12\xc4-I\x12Q\xfc';
 
@@ -10,7 +11,7 @@ authHelpers = {
                    return jwt.sign(user, TOKEN_SECRET, { expiresIn: "1h"});
 
   },
-
+  
 
   // Ensure authenticated
   ensureAuthenticated: function(req, res, next) {
