@@ -6,62 +6,60 @@ var router = express.Router();
 // *** Require Helpers *** //
 var authHelpers = require('./helpers/auth-helpers');
 
+// *** Status Messages *** //
+// Failure messages
+var messageFailureRegister = { status: 'fail', message: 'This email is already registered' };
+var messageFailureLogin = { status: 'fail', message: 'This email and/or password is incorrect' };
+
+// Success messages
+var messageSuccess = function(result, token) { return { status: 'success',
+                                                        data: { token: token,
+                                                                userID: result[0].id,
+                                                                name: result[0].name }
+                                                      } 
+                                             };
+
+// *** Routes *** //
+// Registration route
 router.post('/register', function(req, res, next) {
   
-  var promises = [];
-  
-  promises.push(auth.register(req.body));
-  promises.push(auth.findOne(req.body.email));
-  
-  Promise.all(promises)
-  
-  .then( function (result) {
+  // Submit the new user object to the database
+  auth.register(req.body)
+    
+  .then( function (result) { // Create a JWT
+                             var token = authHelpers.generateToken(result[0]);
 
-    // create a jwt token
-    var token = authHelpers.generateToken(result[1][0]);
-
-    // Send a 'success' status code and message when a new user is added
-    res.status(200).json({ status: 'success',
-                           data: { token: token,
-                                   userID: result[1][0].id,
-                                   name: result[1][0].name }
-                        });
+                             // Send a 'success' status code and message when a new user is added
+                             res.status(200).json(messageSuccess(result, token));
   })
   
-  .catch( function (error) { return res.status(401).json({ status: 'fail',
-                                                           message: 'This email is already registered'}); });
+  .catch( function (error) { return res.status(401).json(messageFailureRegister); });
   
 });
 
-
+// Login route
 router.post('/login', function(req, res, next) {
       
   // Ensure the user exists
   auth.findOne(req.body.email)
   
-  .then( function (result) { var user = result[0];
-                                                          
-                             // Compare the plain text password with the hashed password
-                             var compare = bcrypt.compareSync(req.body.password, user.password);
-                               
-                             if (!compare) { return res.status(401).json({ status: 'fail',
-                                                                           message: 'This email and/or password is incorrect.'});
-                             };
+  .then( function (result) { // Compare the plain text password with the hashed password
+                             var compare = bcrypt.compareSync(req.body.password, result[0].password);
                              
-                             if (compare) { var token = authHelpers.generateToken(req.body);
-                                            return res.status(200).json({ status: 'success',
-                                                                          data: { token: token,
-                                                                                  userID: user.id,
-                                                                                  name: user.name }
-                                                                        });
-                               
-                             }
+                             // If the comparison fails, throw an error  
+                             if (!compare) { throw 'login error'; }
+                             
+                             // If the comparison is successful…
+                             else { // Create a JWT
+                                    var token = authHelpers.generateToken(result[0]);
+                                                                        
+                                    // Send a 'success' status code and message
+                                    return res.status(200).json(messageSuccess(result, token));
+                                  }
                                                              
   })
   
-  .catch( function (error) { return res.status(401).json({ status: 'fail',
-                                                           message: 'This email and/or password is incorrect.'}); 
-  });
+  .catch( function (error) { return res.status(401).json(messageFailureLogin); });
   
 });
 

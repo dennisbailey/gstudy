@@ -8,7 +8,8 @@ module.exports = {
           .insert( { name: newUser.name,
                      email: newUser.email,
                      password: bcrypt.hashSync(newUser.password, 10)
-          });
+          })
+          .returning(['id', 'name', 'email']);
   },
   
   findOne: function (email) {
