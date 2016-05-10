@@ -32,14 +32,10 @@ function authService($http, $window, $location, $rootScope) {
     register: function(user) {
       return $http.post('/auth/register', user);
     },
-  
-    setUserInfo: function(userData) {
-      $window.localStorage.setItem('user', JSON.stringify(userData.data.data.user));
-      $window.localStorage.setItem('token', JSON.stringify(userData.data.data.token));
-    },
     
-    setRegisterUserInfo: function(userData) {
-      $window.localStorage.setItem('user', JSON.stringify(userData.data.data.user.name));
+    setUserInfo: function(userData) {
+      $window.localStorage.setItem('userID', userData.data.data.userID);
+      $window.localStorage.setItem('name', userData.data.data.name);
       $window.localStorage.setItem('token', JSON.stringify(userData.data.data.token));
     },
   

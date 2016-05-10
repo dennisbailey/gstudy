@@ -8,46 +8,51 @@ var authHelpers = require('./helpers/auth-helpers');
 
 router.post('/register', function(req, res, next) {
   
-  auth.register(req.body)
+  var promises = [];
+  
+  promises.push(auth.register(req.body));
+  promises.push(auth.findOne(req.body.email));
+  
+  Promise.all(promises)
   
   .then( function (result) {
+
     // create a jwt token
-    var token = authHelpers.generateToken(req.body);
+    var token = authHelpers.generateToken(result[1][0]);
 
     // Send a 'success' status code and message when a new user is added
     res.status(200).json({ status: 'success',
                            data: { token: token,
-                                   user: req.body }
+                                   userID: result[1][0].id,
+                                   name: result[1][0].name }
                         });
   })
   
-  .catch( function (error) { console.log('register route error', error); return error; });
+  .catch( function (error) { return res.status(401).json({ status: 'fail',
+                                                           message: 'email and/or user already exists'}); });
   
 });
 
 
 router.post('/login', function(req, res, next) {
-  
-  console.log('route', req.body);
-  
-  var user;
-  
+      
   // Ensure the user exists
   auth.findOne(req.body.email)
   
-  .then( function (result) { user = result[0];
+  .then( function (result) { var user = result[0];
                                                           
                              // Compare the plain text password with the hashed password
                              var compare = bcrypt.compareSync(req.body.password, user.password);
                                
                              if (!compare) { return res.status(401).json({ status: 'fail',
-                                                                        message: 'email and/or password is incorrect.'});
+                                                                           message: 'email and/or password is incorrect.'});
                              };
                              
                              if (compare) { var token = authHelpers.generateToken(req.body);
                                             return res.status(200).json({ status: 'success',
                                                                           data: { token: token,
-                                                                                  user: user }
+                                                                                  userID: user.id,
+                                                                                  name: user.name }
                                                                         });
                                
                              }
