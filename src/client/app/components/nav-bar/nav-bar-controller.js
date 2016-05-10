@@ -5,18 +5,15 @@ angular
 navBarCtrl.$inject = ['$rootScope', '$location', 'authService', 'crudService'];
 
 function navBarCtrl($rootScope, $location, authService, crudService) {
-  
   var vm = this;
-  
-  $rootScope.loggedIn = false;
   
   vm.updateRootScope = function() {
     
-    if (typeof($rootScope.loggedIn) === "undefined" && authService.getToken().length > 0) { 
+    if (typeof($rootScope.loggedIn) === "undefined" && authService.getToken() !== null) { 
+
+      var token = { token: authService.getToken().replace(/(^"|"$)/g, '') };
       
-      var tokenObj = { token: authService.getToken().replace(/(^"|"$)/g, '') };
-      
-      crudService.getUserInfo(tokenObj)
+      crudService.getUserInfo(token)
       
       .then( function (result) { $rootScope.loggedIn = true; })
       

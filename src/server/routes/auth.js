@@ -66,6 +66,10 @@ router.post('/login', function(req, res, next) {
 
 // Find user info with token route
 router.post('/token', function(req, res, next) {
+  
+//   var test = authHelpers.verifyToken(req.body.token);
+//   
+//   console.log('token test', test);
     
   return res.status(200).json({status: 'success', user: authHelpers.decodeToken(req.body.token)});
   
