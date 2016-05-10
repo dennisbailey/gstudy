@@ -14,7 +14,7 @@ function crudService($http, $window, $location, $rootScope) {
     },
   
     getSavedDecks: function(userID) {
-      return $http.get('/user/' + userID + '/decks/', user);
+      return $http.get('/user/' + userID + '/decks');
     }
   
         

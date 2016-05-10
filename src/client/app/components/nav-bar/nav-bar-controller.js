@@ -15,7 +15,8 @@ function navBarCtrl($rootScope, $location, authService, crudService) {
       
       crudService.getUserInfo(token)
       
-      .then( function (result) { $rootScope.loggedIn = true; })
+      .then( function (result) { $rootScope.loggedIn = true;
+                                 $rootScope.userID = result.data.user.id; })
       
       .catch( function (error) { $location.path('/'); });
     

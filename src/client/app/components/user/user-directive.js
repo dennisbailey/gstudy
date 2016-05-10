@@ -8,8 +8,8 @@
 function user() {
   return {
     restrict: 'E',
-    templateUrl: 'app/components/landing/user.html',
-    controller: 'userCtrl',
+    templateUrl: 'app/components/user/user.html',
+    controller: 'UserCtrl',
     controllerAs: 'vm',
     bindToController: true  
   };

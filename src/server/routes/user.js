@@ -7,6 +7,10 @@ router.get('/:id/decks', function(req, res, next) {
   
   user.getSavedDecks(req.params.id)
   
+  .then( function (result) { res.send(result) } )
+  
+  .catch( function (error) { console.log('route error', error); });
+  
   
 });
 

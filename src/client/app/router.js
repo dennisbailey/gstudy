@@ -36,6 +36,12 @@ function config($routeProvider) {
                }
             }
   })
+  
+  .when('/dashboard', {
+    template: '<user></user>',
+    restricted: false,
+    preventLoggedIn: false
+  })
 
   .otherwise({
     redirectTo: '/'
@@ -43,17 +49,21 @@ function config($routeProvider) {
 
 }
 
-// function routeChange($rootScope, $location, $window, authService) {
-//   $rootScope.$on('$routeChangeStart', function(event, next, current) {
-//     // if route is restricted and no token is present
-//     if(next.restricted && !$window.localStorage.getItem('token')) {
-//       $location.path('/login');
-//     }
-//     // if token and prevent logging in is true
-//     if(next.preventLoggedIn && $window.localStorage.getItem('token')) {
-//       $location.path('/');
-//     }
-//   });
-// }
+function routeChange($rootScope, $location, $window, authService) {
+  $rootScope.$on('$routeChangeStart', function(event, next, current) {
+ 
+    // if route is restricted and no token is present
+    if(next.restricted && !$window.localStorage.getItem('token')) {
+      $location.path('/login');
+    }
+    
+    // if token and prevent logging in is true
+    if(next.preventLoggedIn && $window.localStorage.getItem('token')) {
+      $location.path('/');
+    }
+  
+  });
+
+}
 
 

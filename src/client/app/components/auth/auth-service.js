@@ -45,7 +45,8 @@ function authService($http, $window, $location, $rootScope) {
     
     getToken: function(userData) {
       return $window.localStorage.getItem('token');
-    },
+    }
+    
     
   };
 };

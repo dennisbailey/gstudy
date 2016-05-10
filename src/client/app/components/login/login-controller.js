@@ -15,7 +15,7 @@ function LoginCtrl($rootScope, $location, authService) {
     authService.login(vm.user)
     
    .then(function(user) { authService.setUserInfo(user);
-                          $location.path('/');
+                          $location.path('/dashboard');
                           $rootScope.userID = user.data.data.userID;
                           $rootScope.loggedIn = true;
                         })
