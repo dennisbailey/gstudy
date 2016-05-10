@@ -16,7 +16,7 @@ function LoginCtrl($rootScope, $location, authService) {
     
    .then(function(user) { authService.setUserInfo(user);
                           $location.path('/');
-                          $rootScope.currentUser = JSON.parse(authService.getUserInfo()); 
+                          $rootScope.userID = user.data.data.userID;
                           $rootScope.loggedIn = true;
                         })
                          

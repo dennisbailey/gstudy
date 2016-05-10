@@ -12,6 +12,10 @@ authHelpers = {
 
   },
   
+  decodeToken: function(token) {
+                    return jwt.decode(token)
+    
+  },
 
   // Ensure authenticated
   ensureAuthenticated: function(req, res, next) {
