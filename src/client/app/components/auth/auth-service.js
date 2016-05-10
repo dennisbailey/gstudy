@@ -11,9 +11,9 @@ angular
   .module('gStudy')
   .service('authService', authService);
 
-authService.$inject = ['$http', '$window', '$location', '$rootScope'];
+authService.$inject = ['$http', '$window', '$location', '$rootScope', 'crudService'];
 
-function authService($http, $window, $location, $rootScope) {
+function authService($http, $window, $location, $rootScope, crudService) {
   
   var user = {};
   
@@ -45,6 +45,19 @@ function authService($http, $window, $location, $rootScope) {
     
     getToken: function(userData) {
       return $window.localStorage.getItem('token');
+    },
+    
+    verifyToken: function () {
+
+      var token = { token: authService.getToken().replace(/(^"|"$)/g, '') };
+      
+      crudService.getUserInfo(token)
+      
+      .then( function (result) { $rootScope.loggedIn = true;
+                                 $rootScope.userID = result.data.user.id; })
+      
+      .catch( function (error) { $location.path('/'); });
+    
     }
     
     

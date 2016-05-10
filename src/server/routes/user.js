@@ -15,4 +15,16 @@ router.get('/:id/decks', function(req, res, next) {
 });
 
 
+router.get('/:userid/deck/:deckid', function(req, res, next) {
+  
+  user.getCards(req.params.deckid)
+  
+  .then( function (result) { res.send(result) } )
+  
+  .catch( function (error) { console.log('route error', error); });
+  
+  
+});
+
+
 module.exports = router;

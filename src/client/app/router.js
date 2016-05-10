@@ -1,7 +1,7 @@
 angular
   .module('gStudy')
-  .config(config);
-//   .run(routeChange);
+  .config(config)
+  .run(routeChange);
 
   config.$inject= ['$routeProvider'];
 
@@ -42,6 +42,12 @@ function config($routeProvider) {
     restricted: false,
     preventLoggedIn: false
   })
+  
+  .when('/study', {
+    template: '<study></study>',
+    restricted: false,
+    preventLoggedIn: false
+  })
 
   .otherwise({
     redirectTo: '/'
@@ -49,15 +55,31 @@ function config($routeProvider) {
 
 }
 
-function routeChange($rootScope, $location, $window, authService) {
+function routeChange($rootScope, $location, $window, authService, crudService) {
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
+
+    // Update rootScope if a token is present
+    if (typeof($rootScope.loggedIn) === "undefined" && $window.localStorage.getItem('token')) {
+
+      var token = { token: authService.getToken().replace(/(^"|"$)/g, '') };
+      
+      crudService.getUserInfo(token)
+      
+      .then( function (result) { 
+                                 $rootScope.loggedIn = true;
+//                                  $rootScope.userID = result.data.user.id; 
+                                 console.log('route change', result);})
+      
+      .catch( function (error) { $location.path('/'); });
+    
+    }
  
-    // if route is restricted and no token is present
+    // If route is restricted and no token is present
     if(next.restricted && !$window.localStorage.getItem('token')) {
       $location.path('/login');
     }
     
-    // if token and prevent logging in is true
+    // If token is present and prevent logging in is true
     if(next.preventLoggedIn && $window.localStorage.getItem('token')) {
       $location.path('/');
     }

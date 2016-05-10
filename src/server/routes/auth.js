@@ -66,9 +66,12 @@ router.post('/login', function(req, res, next) {
   
 // Find user info with token route
 router.post('/token', function(req, res, next) {
-    
-  return res.status(200).json({status: 'success', user: authHelpers.decodeToken(req.body.token)});
-    
+  
+  authHelpers.decodeToken(req.body.token, function (user) {
+    res.status(200).json({status: 'success', user: user })
+  });
+   
+      
 });
 
 module.exports = router;

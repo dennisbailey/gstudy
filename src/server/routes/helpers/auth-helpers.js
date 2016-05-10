@@ -13,8 +13,15 @@ authHelpers = {
   },
   
   
-  decodeToken: function(token) {
-                    return jwt.verify(token, TOKEN_SECRET);;
+  decodeToken: function(token, cb) { 
+    
+    jwt.verify(token, TOKEN_SECRET, function(error, decoded) { 
+      
+      if (error) { cb(error); } 
+      
+      else { cb(decoded); }
+    
+    });
     
   },
 

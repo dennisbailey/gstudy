@@ -6,6 +6,12 @@ module.exports = {
     return knex('users_decks')
           .innerJoin('decks', 'users_decks.deck_id', 'decks.id')
           .where('users_decks.user_id', userID);
+  },
+  
+  getCards: function (deckID) {
+    return knex('users_scores')
+          .innerJoin('cards', 'cards.id', 'users_scores.card_id')
+          .where('cards.deck_id', deckID)
   }
 
 };

@@ -11,6 +11,7 @@ function crudService($http, $window, $location, $rootScope) {
     
     getUserInfo: function(token) {
       return $http.post('/auth/token', token);
+        
     },
   
     getSavedDecks: function(userID) {
