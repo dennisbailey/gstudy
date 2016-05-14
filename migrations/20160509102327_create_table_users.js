@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string('email').unique();
     table.string('password');
-    table.string('name');
+    table.string('username');
   });
   
 };
