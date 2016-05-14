@@ -1,10 +1,10 @@
 angular
   .module('gStudy')
-  .controller('UserCtrl', UserCtrl);
+  .controller('SavedDecksCtrl', SavedDecksCtrl);
 
-UserCtrl.$inject = ['$timeout', '$window', '$rootScope', 'crudService'];
+SavedDecksCtrl.$inject = ['$timeout', '$window', '$rootScope', 'crudService'];
 
-function UserCtrl($timeout, $window, $rootScope, crudService) {
+function SavedDecksCtrl($timeout, $window, $rootScope, crudService) {
   
   var vm = this;
   

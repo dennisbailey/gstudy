@@ -38,7 +38,7 @@ function config($routeProvider) {
   })
   
   .when('/dashboard', {
-    template: '<user></user>',
+    template: '<saved-decks></saved-decks>',
     restricted: false,
     preventLoggedIn: false
   })
