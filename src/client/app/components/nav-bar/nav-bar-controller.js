@@ -1,10 +1,10 @@
 angular
   .module('gStudy')
-  .controller('navBarCtrl', navBarCtrl);
+  .controller('NavBarCtrl', NavBarCtrl);
 
-navBarCtrl.$inject = ['$rootScope', '$location', 'authService', 'crudService'];
+NavBarCtrl.$inject = ['$rootScope', '$location', 'authService', 'crudService'];
 
-function navBarCtrl($rootScope, $location, authService, crudService) {
+function NavBarCtrl($rootScope, $location, authService, crudService) {
   var vm = this;
   
 //   vm.updateRootScope = function() {
