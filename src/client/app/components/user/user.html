@@ -9,21 +9,28 @@
   <h3>Your Saved Decks</h3>
   
   <hr>
-  
+{{vm.decks[1]}}
   <div class="col-md-4" ng-repeat="deck in vm.decks">
     <a href="/user/{{ userID }}/deck/{{deck.id}}">
-    <div class="panel panel-default">
+    <div class="panel panel-info">
       
       <div class="panel-heading">
         <h3 class="panel-title text-center">{{ deck.name }}</h3>
       </div>
 
       <div class="panel-body">
-        <p>{{ deck.desc }}</p>
+        <img class="img-responsive" 
+             ng-src="{{ deck.img }}" 
+             alt="{{deck.name}} image"
+             style="max-height: 300px;
+                    margin: auto;"
+             >
+        <br>
+        <h4 class="text-center">{{ deck.desc }}</h4>
       </div>
     
       <div class="panel-footer">
-      
+        <h4 class="text-center">Created By: {{ deck.username }}</h4>
       </div>
     
     </div> <!-- End of Panel -->
