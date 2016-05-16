@@ -5,7 +5,7 @@
   .module('gStudy')
   .directive('study', study);
 
-function user() {
+function study() {
   return {
     restrict: 'E',
     templateUrl: 'app/components/study/study.html',

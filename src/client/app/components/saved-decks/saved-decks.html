@@ -9,9 +9,9 @@
   <h3>Your Saved Decks</h3>
   
   <hr>
-{{vm.decks[0]}}
+
   <div class="col-md-4" ng-repeat="deck in vm.decks">
-    <a href="/user/{{ userID }}/deck/{{deck.id}}">
+    <a href="#/study" ng-click="vm.deckID = deck.id">
     <div class="panel panel-info">
       
       <div class="panel-heading">

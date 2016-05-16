@@ -9,6 +9,7 @@ function SavedDecksCtrl($timeout, $window, $rootScope, crudService) {
   var vm = this;
   
   vm.decks;
+  vm.deckID;
   
   vm.getSavedDecks = function (userID) {
         
@@ -20,6 +21,6 @@ function SavedDecksCtrl($timeout, $window, $rootScope, crudService) {
   
   };
   
-  vm.getSavedDecks(1);
+  vm.getSavedDecks($rootScope.userID);
 
 }

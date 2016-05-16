@@ -3,9 +3,9 @@ var user = require('../knex-queries/user-queries');
 var router = express.Router();
 
 
-router.get('/:id/decks', function(req, res, next) {
+router.get('/:userID', function(req, res, next) {
   
-  user.getSavedDecks(req.params.id)
+  user.getSavedDecks(req.params.userID)
   
   .then( function (result) { res.send(result) } )
   
@@ -15,9 +15,9 @@ router.get('/:id/decks', function(req, res, next) {
 });
 
 
-router.get('/:userid/deck/:deckid', function(req, res, next) {
+router.get('/deck/:deckID', function(req, res, next) {
   
-  user.getCards(req.params.deckid)
+  user.getCards(req.params.deckID)
   
   .then( function (result) { res.send(result) } )
   

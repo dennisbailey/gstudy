@@ -10,9 +10,16 @@ module.exports = {
   },
   
   getCards: function (deckID) {
-    return knex('users_scores')
-          .innerJoin('cards', 'cards.id', 'users_scores.card_id')
+    return knex('cards')
           .where('cards.deck_id', deckID)
+  },
+  
+  updaateScore: function (userID, cardID, score) {
+    return knex('users_scores')
+          .where({ user_id: userID, 
+                   card_id: cardID} )
+          .update({ score: score });
+          
   }
 
 };

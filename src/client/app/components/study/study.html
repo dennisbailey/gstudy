@@ -1,34 +1,127 @@
 <div class="container">
 
-  <h1 class="text-center">Welcome to the User Dashboard!</h1>
+  <h1 class="text-center">Welcome to the Study Section!</h1>
   
   <br>
   
   <hr>
   
-  <h3>Your Saved Decks</h3>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+    
+      <h4 class="text-center">Progress</h4>
+    
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="vm.progress" aria-valuemin="0" aria-valuemax="100" style="width: {{ vm.progress * 100 + '%'}};"></div>
+      </div>
+    
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-4 col-md-offset-2">
+      
+      <button type="button" 
+              class="btn btn-primary pull-right"
+              ng-click="vm.prevCard(); answerCardShow = true;"
+              >Previous Question
+      </button>
+    
+    </div>
+    
+    <div class="col-md-4">
+      
+      <button type="button" 
+              class="btn btn-primary pull-left"
+              ng-click="vm.nextCard(); answerCardShow = false;"
+              >Next Question
+      </button>
+      
+    </div>
+  </div>
   
   <hr>
   
-  <div class="col-md-4" ng-repeat="deck in vm.decks">
-    <a href="/user/{{ userID }}/deck/{{deck.id}}">
-    <div class="panel panel-default">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+  
+      <div class="panel panel-info">
+        
+        <div class="panel-heading">
+          <h3 class="panel-title text-center">Question {{ vm.question }} of {{ vm.totalQuestions }}</h3>
+        </div>
+  
+        <div class="panel-body">
+          <h4 class="text-center">{{ vm.cards[vm.counter].question }}</h4>
+        </div>
       
-      <div class="panel-heading">
-        <h3 class="panel-title text-center">{{ deck.name }}</h3>
-      </div>
-
-      <div class="panel-body">
-        <p>{{ deck.desc }}</p>
-      </div>
-    
-      <div class="panel-footer">
+      </div> <!-- End of Panel -->
+      <br>
+    </div> <!-- End of column -->
+  </div> <!-- End of row -->
+  
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+  
+      <div class="panel panel-info">
+        
+        <div class="panel-heading">
+          <h3 class="panel-title text-center">Answer</h3>
+        </div>
+  
+        <div class="panel-body">
+          <h4 class="text-center" 
+              ng-click="answerCardShow = true;"
+              ng-hide="answerCardShow"
+              >Click to reveal the answer</h4>
+          <h4 class="text-center"
+              ng-show="answerCardShow"
+              >{{ vm.cards[vm.counter].answer }}</h4>
+        </div>
       
+      </div> <!-- End of Panel -->
+    </div> <!-- End of column -->
+  </div> <!-- End of row -->
+  
+  <div class="row"
+       ng-show="answerCardShow"
+       >
+    <div class="col-md-8 col-md-offset-2 text-center">
+      <h3>How did it go?</h3>
+      
+      <br>
+      
+      <div class="btn-group" role="group" aria-label="...">
+        <button type="button" 
+                class="btn btn-danger"
+                ng-click="vm.nextCard();
+                          vm.score(vm.cards[vm.counter].id, 0);
+                          answerCardShow = false;"
+                style="width: 175px;"
+                >I Need More Practice
+        </button>
+        
+        <button type="button" 
+                class="btn btn-warning"
+                ng-click="vm.nextCard(); 
+                          vm.score(vm.cards[vm.counter].id, 1);
+                          answerCardShow = false;"
+                style="width: 175px;"
+                >I Kinda Got It
+        </button>
+                
+        <button type="button" 
+                class="btn btn-success"
+                ng-click="vm.nextCard();
+                          vm.score(vm.cards[vm.counter].id, 2);
+                          answerCardShow = false;"
+                style="width: 175px;"
+                >I Aced it!
+        </button>
       </div>
-    
-    </div> <!-- End of Panel -->
-    </a>
-  </div> <!-- End of column -->
-
+      
+    </div>
+    <br>
+  </div>
 
 </div>

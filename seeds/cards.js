@@ -31,7 +31,7 @@ exports.seed = function(knex, Promise) {
     knex('cards').insert({deck_id: 2, question: 'V\'Ger', answer: 'Maybe?'}),
     knex('cards').insert({deck_id: 2, question: 'Cylons', answer: 'Maybe?'}),
     
-    knex('cards').insert({deck_id: 3, question: 'Pain', answer: 'Yes!'}),
+    knex('cards').insert({deck_id: 3, question: 'Plain', answer: 'Yes!'}),
     knex('cards').insert({deck_id: 3, question: 'Poppy', answer: 'Yes!'}),
     knex('cards').insert({deck_id: 3, question: 'Sesame', answer: 'Yes!'}),
     knex('cards').insert({deck_id: 3, question: 'Egg', answer: 'Yes!'}),
